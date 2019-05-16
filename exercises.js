@@ -69,24 +69,26 @@
 
 // 10 Products
 function products(arr){
-  let numProduct = 1;
-  let newArr = [];
-  
-  for (let i = 0; i < arr.length; i ++) {
-   let productArray = []; 
-   productArray.push(arr);
-    
-    productArray.splice(i, 1);
-    console.log(productArray)
-    numProduct = 1;
-    for (let j = 0; j < productArray.length; j ++) {
-  
-      (numProduct *= productArray[j]);
-      newArr.push(numProduct);
-    }
-  } 
+  let index = 0;
+  let right = new Array(arr.length);
+  right[arr.length - 1] = 1;
+  let left = new Array(arr.length);
+  right.fill(1);
+  left.fill(1);
+  let output = [];
 
-  console.log(newArr);
+  for ( let i = 1; i < arr.length; i++) {
+    left[i] = (arr[i - 1] * left[i - 1]);
+    console.log(left[i - 1])
+  }
+  for (let j = arr.length - 2; j >= 0; j --) {
+    right[j] = arr[j +1] * right[j + 1];
+    console.log(right)
+  }
+  for (let k = 0; k < arr.length; k++) {
+    output.push(left[k] * right[k])
+  }
+  console.log(output) ;
 }
 
 products([1, 3, 9, 4]);
